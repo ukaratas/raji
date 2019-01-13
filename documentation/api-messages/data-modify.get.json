@@ -1,0 +1,33 @@
+{
+    "samples": [
+        {
+            "request": {
+                "user": "anonymous",
+                "process": "retail loan application",
+                "state": "start",
+                "transition": "apply",
+                "lang": "tr",
+                "product": "STD_KRD",
+                "id": "b5730fe9-44b4-40c4-8134-839755d24ade"
+            },
+            "response": {
+                "fields": [
+                    {
+                        "id": "productCode",
+                        "type": "parameter",
+                        "valueType": "text",
+                        "value": "STD_KRD"
+                    },
+                    {
+                        "id": "requestedAmount",
+                        "value": "0"
+                    },
+                    {
+                        "id": "marketingPermission",
+                        "value": "false"
+                    }
+                ]
+            }
+        }
+    ]
+}
