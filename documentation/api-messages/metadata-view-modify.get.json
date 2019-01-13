@@ -1,0 +1,278 @@
+{
+    "samples": [
+        {
+            "request": {
+                "user": "anonymous",
+                "process": "retail loan application",
+                "state": "start",
+                "lang": "tr",
+                "product": "STD_KRD",
+                "id": "b5730fe9-44b4-40c4-8134-839755d24ade"
+            },
+            "response": {
+                "type": "wizard",
+                "wizardConfig": [
+                    {
+                        "step": 1,
+                        "title": "Başvuru Bilgileri",
+                        "icon": "/img/retail/loan/apply",
+                        "isActive": true
+                    },
+                    {
+                        "step": 2,
+                        "title": "Başvuru Sonucu",
+                        "icon": "/img/retail/loan/eval",
+                        "isActive": false
+                    },
+                    {
+                        "step": 2,
+                        "title": "Ziyaret Bilgileri",
+                        "icon": "/img/retail/loan/visit",
+                        "isActive": false
+                    }
+                ],
+                "pageConfig": {
+                    "masterPage": "corporateInternet",
+                    "css": "bankiWeb",
+                    "title": "Web Kredi Başvurusu",
+                    "prefixComponents": [
+                        {
+                            "order": 1,
+                            "component": "retailLoanShortMenuComponent"
+                        }
+                    ],
+                    "suffixComponents": [
+                        {
+                            "order": 1,
+                            "component": "retailLoanCalculatorComponent"
+                        },
+                        {
+                            "order": 2,
+                            "component": "loanProgressInformationComponent"
+                        }
+                    ]
+                },
+                "fields": [
+                    {
+                        "id": "productCode",
+                        "type": "parameter",
+                        "valueType": "text",
+                        "value": "STD_KRD"
+                    },
+                    {
+                        "id": "requestedAmount",
+                        "type": "input",
+                        "label": "Talep Edilen Tutar",
+                        "valueType": "currency",
+                        "hint": {
+                            "header": "İhtiyacınız Olan Kredi Tutarı",
+                            "content": "40.000 TL’ye kadar ihtiyacınız olan kredi tutarını hemen giriniz. Krediniz onaylanması durumunda eşit taksit ödemeli, kefil ve teminat gerektirmeyen Masrafsız İhtiyaç Kredinizi şubeye gitmeden kullanabilirsiniz."
+                        },
+                        "inputConfig": {
+                            "minFractionDigits": "2",
+                            "maxFractionDigits": "2",
+                            "locale": "tr",
+                            "currency": "TRL",
+                            "display": "symbol"
+                        },
+                        "validations": [
+                            {
+                                "type": "valueRangeByService",
+                                "service": "/retailLoan/helper/getLoanApplicationLimits/{product}/{campaign}",
+                                "parameters": [
+                                    {
+                                        "name": "product",
+                                        "type": "path",
+                                        "value": "productCode"
+                                    },
+                                    {
+                                        "name": "campaign",
+                                        "type": "path",
+                                        "value": "'STANDART'"
+                                    },
+                                    {
+                                        "name": "currency",
+                                        "type": "query",
+                                        "value": "'TRL'"
+                                    }
+                                ],
+                                "mapping": {
+                                    "min": "response.data.minimum",
+                                    "max": "response.data.maximum"
+                                },
+                                "message": "İhtiyacınız olan kredi tutarı en az {min} ve {max} arasında olmalıdır",
+                                "transitionsToValidate": [
+                                    "apply"
+                                ]
+                            },
+                            {
+                                "type": "required",
+                                "message": "İhtiyacınız Olan Kredi Tutarı girmeniz zorunludur",
+                                "transitionsToValidate": [
+                                    "apply"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "requestedTerm",
+                        "type": "input",
+                        "label": "Talep Ettiğiniz Taksit Sayısı",
+                        "valueType": "select",
+                        "hint": {
+                            "header": "Talep Ettiğiniz Taksit Sayısı",
+                            "content": "Kredinizi 36 aya kadar taksit ile geri ödeyebilirsiniz. Lütfen kaç taksit ile geri ödemek istediğinizi seçiniz."
+                        },
+                        "inputConfig": {
+                            "loadingMessage": "Yükleniyor",
+                            "selectMessage": "Seçiniz",
+                            "options": [
+                                {
+                                    "label": "3",
+                                    "value": "3"
+                                },
+                                {
+                                    "label": "6",
+                                    "value": "6"
+                                },
+                                {
+                                    "label": "9",
+                                    "value": "9"
+                                }
+                            ]
+                        },
+                        "validations": [
+                            {
+                                "type": "required",
+                                "message": "Taksit sayısı seçiniz",
+                                "transitionsToValidate": [
+                                    "apply"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "citizenshipNumber",
+                        "type": "input",
+                        "label": "T.C. Kimlik Numaranız",
+                        "valueType": "number",
+                        "hint": {
+                            "header": "T.C. Kimlik Numaranız",
+                            "content": "Nüfus cüzdanınızda yazan ve 11 haneden oluşan TC Kimlik numaranızı bizimle paylaştığınızda sizi tanıyabiliriz."
+                        },
+                        "validations": [
+                            {
+                                "type": "lenght",
+                                "lenght": "11",
+                                "message": "T.C. Kimlik Numaranız 11 karakter olmalıdır",
+                                "transitionsToValidate": [
+                                    "apply"
+                                ]
+                            },
+                            {
+                                "type": "required",
+                                "message": "T.C. Kimlik Numaranızı girmeniz zorunludur",
+                                "transitionsToValidate": [
+                                    "apply"
+                                ]
+                            },
+                            {
+                                "type": "tckn",
+                                "message": "Hatalı T.C. Kimlik Numarası girdiniz. Geçerli bir kimlik numarası giriniz",
+                                "transitionsToValidate": [
+                                    "apply"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "email",
+                        "type": "input",
+                        "label": "E-Posta Adresiniz",
+                        "valueType": "email",
+                        "hint": {
+                            "header": "E–Posta Adresiniz",
+                            "content": "Başvurunuz ve krediniz ile ilgili tüm bilgileri e-posta adresinize ileteceğimiz için lütfen e-posta adresinizi tam ve doğru yazdığınızdan emin olunuz."
+                        },
+                        "validations": [
+                            {
+                                "type": "email",
+                                "message": "Geçerli bir e-posta adresi giriniz.",
+                                "transitionsToValidate": [
+                                    "apply"
+                                ]
+                            },
+                            {
+                                "type": "required",
+                                "message": "E-Posta adresinizi girmek zorunludur",
+                                "transitionsToValidate": [
+                                    "apply"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "mobilePhone",
+                        "type": "input",
+                        "label": "Cep Telefonu Numaranız",
+                        "valueType": "phone",
+                        "hint": {
+                            "header": "Cep Telefonu Numaranız",
+                            "content": "Cep telefonu numaranızı başında sıfır olmadan yazınız. Başvurunuzu tamamlamak için size kısa mesaj ile doğrulama şifrenizi göndereceğiz, lütfen telefonunuzu yanınızda bulundurunuz. Ziyaret teyidiniz öncelikli olmak üzere, sizinle tüm iletişimimizi bu numara üzerinden yapacağımız için paylaştığınız numaranın size ait olmasına ve telefonlarınıza yanıt vermeye özen gösteriniz."
+                        },
+                        "inputConfig": {
+                            "requireCountryCode": false,
+                            "areaCodePattern": "5**",
+                            "numberPattern": "*******"
+                        },
+                        "validations": [
+                            {
+                                "type": "number",
+                                "message": "Geçerli bir cep telefonu numarası giriniz",
+                                "transitionsToValidate": [
+                                    "apply"
+                                ]
+                            },
+                            {
+                                "type": "required",
+                                "message": "Cep Telefonunuzu girmek zorunludur",
+                                "transitionsToValidate": [
+                                    "apply"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "kvkk",
+                        "type": "input",
+                        "label": "Başvurumun değerlendirilebilmesi için paylaştığım kişisel verilerime ilişkin 6698 sayılı Kişisel Verilerin Korunması Kanunu hakkındaki link'te bulunan detaylı bilgilendirme metnini okudum.",
+                        "valueType": "check",
+                        "validations": [
+                            {
+                                "type": "required",
+                                "message": "Kişisel Verilerin Korunması Kanunu uyarınca haklarınıza ait bilgilendirmeyi okuyup onaylayınız.",
+                                "transitionsToValidate": [
+                                    "apply"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "marketingPermission",
+                        "type": "input",
+                        "label": "Bankanız tarafından şahsıma uygun ürün ve hizmetlere yönelik tanıtım, pazarlama, promosyon ve kampanya faaliyetleri kapsamında; bankacılık ürünlerinin sunulabilmesi adına gerektiğinde kredi kayıt bürosu vb platformlar aracılığı ile finansal bilgilerimin işlenmesini, paylaşılmasını ve bankanızda kayıtlı bulunan iletişim bilgilerim üzerinden, telefon, e-posta, SMS ve benzeri uzaktan iletişim araçları üzerinden iletişime geçilmesini onaylıyorum.",
+                        "valueType": "check"
+                    }
+                ],
+                "transitions": [
+                    {
+                        "button": {
+                            "transition": "apply",
+                            "label": "Başvur"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
