@@ -1,6 +1,7 @@
 {
     "samples": [
         {
+            "_comment": "Initializing",
             "request": {
                 "user": "anonymous",
                 "process": "retail loan application",
@@ -19,6 +20,7 @@
                         "value": "STD_KRD"
                     },
                     {
+
                         "id": "requestedAmount",
                         "value": "0"
                     },

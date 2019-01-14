@@ -1,0 +1,31 @@
+{
+    "samples": [
+        {
+            "_comment": "Initializer fields for new retail loan application",
+            "request": {
+                "user": "anonymous",
+                "process": "retail-loan-application"
+            },
+            "response": {
+                "fields": [
+                    {
+                        "id": "productCode",
+                        "type": "text"
+                    },
+                    {
+                        "id": "ownerChannel",
+                        "type": "text"
+                    },
+                    {
+                        "id": "submitterChannel",
+                        "type": "text"
+                    },
+                    {
+                        "id": "affiliateCode",
+                        "type": "text"
+                    }
+                ]
+            }
+        }
+    ]
+}
