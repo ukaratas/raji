@@ -4,12 +4,17 @@
             "_comment": "Initializing new retail loan application",
             "request": {
                 "user": "anonymous",
+                "lang": "tr",
                 "process": "retail-loan-application",
                 "id": "faafdc5f-beb6-498a-88cc-c5db698a5fde",
                 "fields": [
                     {
                         "id": "productCode",
                         "value": "STD_WEB_LOAN"
+                    },
+                    {
+                        "id": "campaignCode",
+                        "value": "PRSONEL"
                     },
                     {
                         "id": "ownerChannel",
@@ -25,7 +30,14 @@
                     }
                 ]
             },
-            "response": {}
+            "response": {
+                "transitions": [
+                    {
+                        "id": "apply",
+                        "label": "Başvur"
+                    }
+                ]
+            }
         }
     ]
 }

@@ -13,6 +13,10 @@
                         "type": "text"
                     },
                     {
+                        "id": "campaignCode",
+                        "type": "text"
+                    },
+                    {
                         "id": "ownerChannel",
                         "type": "text"
                     },

@@ -2,68 +2,62 @@
     "samples": [
         {
             "request": {
+                "id": "b5730fe9-44b4-40c4-8134-839755d24ade",
                 "user": "anonymous",
-                "process": "retail loan application",
-                "state": "start",
                 "lang": "tr",
-                "product": "STD_KRD",
-                "id": "b5730fe9-44b4-40c4-8134-839755d24ade"
+                "process": "retail-loan-application",
+                "transition": "apply"
             },
             "response": {
-                "type": "wizard",
-                "wizardConfig": [
-                    {
-                        "step": 1,
-                        "title": "Başvuru Bilgileri",
-                        "icon": "/img/retail/loan/apply",
-                        "isActive": true
-                    },
-                    {
-                        "step": 2,
-                        "title": "Başvuru Sonucu",
-                        "icon": "/img/retail/loan/eval",
-                        "isActive": false
-                    },
-                    {
-                        "step": 2,
-                        "title": "Ziyaret Bilgileri",
-                        "icon": "/img/retail/loan/visit",
-                        "isActive": false
-                    }
-                ],
-                "pageConfig": {
-                    "masterPage": "corporateInternet",
-                    "css": "bankiWeb",
-                    "title": "Web Kredi Başvurusu",
-                    "prefixComponents": [
+                "form": {
+                    "type": "wizard: wizard | plain",
+                    "wizardConfig": [
                         {
-                            "order": 1,
-                            "component": "retailLoanShortMenuComponent"
-                        }
-                    ],
-                    "suffixComponents": [
-                        {
-                            "order": 1,
-                            "component": "retailLoanCalculatorComponent"
+                            "step": 1,
+                            "label": "Başvuru Bilgileri",
+                            "icon": "/img/retail/loan/apply",
+                            "isActive": true
                         },
                         {
-                            "order": 2,
-                            "component": "loanProgressInformationComponent"
+                            "step": 2,
+                            "label": "Başvuru Sonucu",
+                            "icon": "/img/retail/loan/eval",
+                            "isActive": false
+                        },
+                        {
+                            "step": 2,
+                            "label": "Ziyaret Bilgileri",
+                            "icon": "/img/retail/loan/visit",
+                            "isActive": false
                         }
-                    ]
+                    ],
+                    "config": {
+                        "masterPage": "corporateInternet",
+                        "css": "bankiWeb",
+                        "title": "Web Kredi Başvurusu",
+                        "prefixComponents": [
+                            {
+                                "order": 1,
+                                "component": "retailLoanShortMenuComponent"
+                            }
+                        ],
+                        "suffixComponents": [
+                            {
+                                "order": 1,
+                                "component": "retailLoanCalculatorComponent"
+                            },
+                            {
+                                "order": 2,
+                                "component": "loanProgressInformationComponent"
+                            }
+                        ]
+                    }
                 },
                 "fields": [
                     {
-                        "id": "productCode",
-                        "type": "parameter",
-                        "valueType": "text",
-                        "value": "STD_KRD"
-                    },
-                    {
                         "id": "requestedAmount",
-                        "type": "input",
                         "label": "Talep Edilen Tutar",
-                        "valueType": "currency",
+                        "type": "currency",
                         "hint": {
                             "header": "İhtiyacınız Olan Kredi Tutarı",
                             "content": "40.000 TL’ye kadar ihtiyacınız olan kredi tutarını hemen giriniz. Krediniz onaylanması durumunda eşit taksit ödemeli, kefil ve teminat gerektirmeyen Masrafsız İhtiyaç Kredinizi şubeye gitmeden kullanabilirsiniz."
@@ -71,7 +65,6 @@
                         "inputConfig": {
                             "minFractionDigits": "2",
                             "maxFractionDigits": "2",
-                            "locale": "tr",
                             "currency": "TRL",
                             "display": "symbol"
                         },
@@ -116,9 +109,8 @@
                     },
                     {
                         "id": "requestedTerm",
-                        "type": "input",
+                        "type": "select",
                         "label": "Talep Ettiğiniz Taksit Sayısı",
-                        "valueType": "select",
                         "hint": {
                             "header": "Talep Ettiğiniz Taksit Sayısı",
                             "content": "Kredinizi 36 aya kadar taksit ile geri ödeyebilirsiniz. Lütfen kaç taksit ile geri ödemek istediğinizi seçiniz."
@@ -153,9 +145,8 @@
                     },
                     {
                         "id": "citizenshipNumber",
-                        "type": "input",
+                        "type": "number",
                         "label": "T.C. Kimlik Numaranız",
-                        "valueType": "number",
                         "hint": {
                             "header": "T.C. Kimlik Numaranız",
                             "content": "Nüfus cüzdanınızda yazan ve 11 haneden oluşan TC Kimlik numaranızı bizimle paylaştığınızda sizi tanıyabiliriz."
@@ -187,9 +178,8 @@
                     },
                     {
                         "id": "email",
-                        "type": "input",
+                        "type": "email",
                         "label": "E-Posta Adresiniz",
-                        "valueType": "email",
                         "hint": {
                             "header": "E–Posta Adresiniz",
                             "content": "Başvurunuz ve krediniz ile ilgili tüm bilgileri e-posta adresinize ileteceğimiz için lütfen e-posta adresinizi tam ve doğru yazdığınızdan emin olunuz."
@@ -213,21 +203,18 @@
                     },
                     {
                         "id": "mobilePhone",
-                        "type": "input",
+                        "type": "phone",
                         "label": "Cep Telefonu Numaranız",
-                        "valueType": "phone",
                         "hint": {
                             "header": "Cep Telefonu Numaranız",
                             "content": "Cep telefonu numaranızı başında sıfır olmadan yazınız. Başvurunuzu tamamlamak için size kısa mesaj ile doğrulama şifrenizi göndereceğiz, lütfen telefonunuzu yanınızda bulundurunuz. Ziyaret teyidiniz öncelikli olmak üzere, sizinle tüm iletişimimizi bu numara üzerinden yapacağımız için paylaştığınız numaranın size ait olmasına ve telefonlarınıza yanıt vermeye özen gösteriniz."
                         },
                         "inputConfig": {
-                            "requireCountryCode": false,
-                            "areaCodePattern": "5**",
-                            "numberPattern": "*******"
+                            "requireCountryCode": false
                         },
                         "validations": [
                             {
-                                "type": "number",
+                                "type": "gsmPhone",
                                 "message": "Geçerli bir cep telefonu numarası giriniz",
                                 "transitionsToValidate": [
                                     "apply"
@@ -244,9 +231,8 @@
                     },
                     {
                         "id": "kvkk",
-                        "type": "input",
+                        "type": "check",
                         "label": "Başvurumun değerlendirilebilmesi için paylaştığım kişisel verilerime ilişkin 6698 sayılı Kişisel Verilerin Korunması Kanunu hakkındaki link'te bulunan detaylı bilgilendirme metnini okudum.",
-                        "valueType": "check",
                         "validations": [
                             {
                                 "type": "required",
@@ -259,9 +245,8 @@
                     },
                     {
                         "id": "marketingPermission",
-                        "type": "input",
-                        "label": "Bankanız tarafından şahsıma uygun ürün ve hizmetlere yönelik tanıtım, pazarlama, promosyon ve kampanya faaliyetleri kapsamında; bankacılık ürünlerinin sunulabilmesi adına gerektiğinde kredi kayıt bürosu vb platformlar aracılığı ile finansal bilgilerimin işlenmesini, paylaşılmasını ve bankanızda kayıtlı bulunan iletişim bilgilerim üzerinden, telefon, e-posta, SMS ve benzeri uzaktan iletişim araçları üzerinden iletişime geçilmesini onaylıyorum.",
-                        "valueType": "check"
+                        "type": "check",
+                        "label": "Bankanız tarafından şahsıma uygun ürün ve hizmetlere yönelik tanıtım, pazarlama, promosyon ve kampanya faaliyetleri kapsamında; bankacılık ürünlerinin sunulabilmesi adına gerektiğinde kredi kayıt bürosu vb platformlar aracılığı ile finansal bilgilerimin işlenmesini, paylaşılmasını ve bankanızda kayıtlı bulunan iletişim bilgilerim üzerinden, telefon, e-posta, SMS ve benzeri uzaktan iletişim araçları üzerinden iletişime geçilmesini onaylıyorum."
                     }
                 ],
                 "transitions": [

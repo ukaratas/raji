@@ -1,0 +1,52 @@
+{
+    "samples": [
+        {
+            "_comment": "Calling a transition for new retail loan application",
+            "request": {
+                "user": "anonymous",
+                "lang": "tr",
+                "process": "retail-loan-application",
+                "transition": "apply",
+                "id": "faafdc5f-beb6-498a-88cc-c5db698a5fde",
+                "fields": [
+                    {
+                        "id": "requestedAmount",
+                        "value": "5000"
+                    },
+                    {
+                        "id": "requestedTerm",
+                        "value": "36"
+                    },
+                    {
+                        "id": "citizenshipNumber",
+                        "value": "38552069009"
+                    },
+                    {
+                        "id": "email",
+                        "value": "ukaratas@rockmail.com"
+                    },
+                    {
+                        "id": "mobilePhone",
+                        "value": "5302892896"
+                    },
+                    {
+                        "id": "kvkk",
+                        "value": "true"
+                    },
+                    {
+                        "id": "marketingPermission",
+                        "value": "false"
+                    }
+                ]
+            },
+            "response": {
+                "transitions": [
+                    {
+                        "id": "apply",
+                        "label": "Başvur"
+                    }
+                ]
+            }
+        }
+    ]
+}
