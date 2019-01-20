@@ -2,7 +2,14 @@
 
 A simple State Machine Business Process Engine  
 
-## Message Call Order for New Instance
+## Searching an items in specified process
+
+1. GET  /metadata/view/search
+   >Get search form metadata to generate
+2. GET /data/search
+   >Call search entity for filtered items
+
+## Creating new item
 
 1. GET  /metadata/data/new
    >Get initializer informations for specific process
@@ -11,4 +18,4 @@ A simple State Machine Business Process Engine
 3. GET /metadata/view/modify
    >Get modify form metadata to generate
 4. POST /data/modify
-   >Post form data to save 
+   >Post form data to save

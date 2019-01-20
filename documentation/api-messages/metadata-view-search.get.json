@@ -1,0 +1,122 @@
+{
+    "samples": [
+        {
+            "request": {
+                "user": "anonymous",
+                "lang": "tr",
+                "process": "retail-loan-application"
+            },
+            "response": {
+                "form": {
+                    "config": {
+                        "masterPage": "backoffice",
+                        "css": "backoffice",
+                        "title": "Kredi Başvuru Arama"
+                    }
+                },
+                "filters": [
+                    {
+                        "id": "requestedAmount",
+                        "label": "Talep Edilen Tutar",
+                        "type": "currency",
+                        "hint": {
+                            "header": "Başvuruda Girilen Kredi Tutarı",
+                            "content": "Müşteri tarafından talep edilen kredi tutarına göre filtreleme yapabilirsiniz."
+                        },
+                        "inputConfig": {
+                            "minFractionDigits": "2",
+                            "maxFractionDigits": "2",
+                            "currency": "TRL",
+                            "display": "symbol"
+                        },
+                        "validations": [
+                            {
+                                "type": "valueRangeByService",
+                                "service": "/retailLoan/helper/getLoanApplicationLimits/{product}/{campaign}",
+                                "parameters": [
+                                    {
+                                        "name": "product",
+                                        "type": "path",
+                                        "value": "productCode"
+                                    },
+                                    {
+                                        "name": "campaign",
+                                        "type": "path",
+                                        "value": "'STANDART'"
+                                    },
+                                    {
+                                        "name": "currency",
+                                        "type": "query",
+                                        "value": "'TRL'"
+                                    }
+                                ],
+                                "mapping": {
+                                    "min": "response.data.minimum",
+                                    "max": "response.data.maximum"
+                                },
+                                "message": "Kredi tutarı en az {min} ve {max} arasında olmalıdır"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "requestedTerm",
+                        "type": "select",
+                        "label": "Taksit Sayısı",
+                        "hint": {
+                            "header": "Müşterinin Talep Ettiği Taksit Sayısı",
+                            "content": "Müşterinin talep ettiği taksit sayısına göre filtreleme yapabilirsiniz."
+                        },
+                        "inputConfig": {
+                            "options": [
+                                {
+                                    "label": "3",
+                                    "value": "3"
+                                },
+                                {
+                                    "label": "6",
+                                    "value": "6"
+                                },
+                                {
+                                    "label": "9",
+                                    "value": "9"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "fields": [
+                    {
+                        "id": "applyDate",
+                        "type": "date",
+                        "label": "Başvuru Tarihi"
+                    },
+                    {
+                        "id": "requestedAmount",
+                        "type": "currency",
+                        "label": "Tutar"
+                    },
+                    {
+                        "id": "requestedTerm",
+                        "type": "select",
+                        "label": "Taksit Sayısı"
+                    },
+                    {
+                        "id": "applicant.citizenshipNumber",
+                        "type": "number",
+                        "label": "T.C. Kimlik Numaranız"
+                    },
+                    {
+                        "id": "applicant.email",
+                        "type": "email",
+                        "label": "E-Posta Adresiniz"
+                    },
+                    {
+                        "id": "instance.name",
+                        "type": "text",
+                        "label": "Akış Aşaması"
+                    }
+                ]
+            }
+        }
+    ]
+}

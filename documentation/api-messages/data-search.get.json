@@ -1,0 +1,16 @@
+{
+    "samples": [
+        {
+            "_comment": "For searching item(s) in sepecified entity",
+            "request": {
+                "user": "anonymous",
+                "lang": "tr",
+                "process": "retail-loan-application",
+                "query": "ODATA format filter"
+            },
+            "response": {
+                "items": []
+            }
+        }
+    ]
+}
