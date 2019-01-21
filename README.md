@@ -9,6 +9,13 @@ A simple State Machine Business Process Engine
 2. GET /data/search
    >Call search entity for filtered items
 
+## Displaying an item
+
+1. GET /metadata/view/display
+   >Get display form metadata to generate
+2. GET /data/search
+   >Call search entity for specified item  
+
 ## Creating new item
 
 1. GET  /metadata/data/new

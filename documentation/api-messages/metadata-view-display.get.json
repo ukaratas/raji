@@ -1,0 +1,122 @@
+{
+    "samples": [
+        {
+            "request": {
+                "user": "anonymous",
+                "lang": "tr",
+                "process": "retail-loan-application",
+                "transition": "apply",
+                "id": "b5730fe9-44b4-40c4-8134-839755d24ade"
+            },
+            "response": {
+                "form": {
+                    "title": "Kredi Başvurusu",
+                    "regions": [
+                        {
+                            "order": 1,
+                            "type": "group; group | tab | list | documents | infoLine | button",
+                            "label": "Basvuran Bilgileri",
+                            "fields": [
+                                {
+                                    "order": 1,
+                                    "label": "Başvuran",
+                                    "data": [
+                                        {
+                                            "order": 1,
+                                            "type": "data: data | text ",
+                                            "id": "item.applicant.firstName"
+                                        },
+                                        {
+                                            "order": 2,
+                                            "type": "text",
+                                            "id": " "
+                                        },
+                                        {
+                                            "order": 3,
+                                            "type": "data",
+                                            "id": "item.applicant.lastName"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "order": 2,
+                                    "label": "Vatandaşlık Numarası",
+                                    "data": {
+                                        "type": "data",
+                                        "id": "item.applicant.citizenshipNumber"
+                                    }
+                                },
+                                {
+                                    "order": 3,
+                                    "label": "GSM Numarası",
+                                    "data": {
+                                        "type": "data",
+                                        "id": "item.applicant.mobilePhone",
+                                        "pipe": "mobilePhone:short"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "order": 2,
+                            "type": "tab",
+                            "tabs": [
+                                {
+                                    "order": 1,
+                                    "label": "Kredi Bilgileri",
+                                    "regions": []
+                                }
+                            ]
+                        },
+                        {
+                            "order": 3,
+                            "type": "infoLine",
+                            "theme": {
+                                "success" : "item.instance.status == 'completed'",
+                                "warning " : "item.instance.status != 'completed'"
+                            },
+                            "data": [
+                                {
+                                    "order": 1,
+                                    "type": "data",
+                                    "id": "item.applicant.firstName"
+                                },
+                                {
+                                    "order": 2,
+                                    "type": "text",
+                                    "id": " "
+                                },
+                                {
+                                    "order": 3,
+                                    "type": "data",
+                                    "id": "item.applicant.lastName"
+                                }
+                            ]
+                        },
+
+                        {
+                            "order": 4,
+                            "type": "button",
+                            "buttons": [
+                                {
+                                    "order": 1,
+                                    "position": "right",
+                                    "label": "Onayla",
+                                    "transition": "approve",
+                                    "type": "primary"
+                                },
+                                {
+                                    "order": 2,
+                                    "position": "right",
+                                    "label": "Reddet",
+                                    "transition": "reject",
+                                    "type": "secondary"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
