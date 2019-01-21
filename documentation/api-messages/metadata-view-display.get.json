@@ -71,29 +71,52 @@
                         {
                             "order": 3,
                             "type": "infoLine",
-                            "theme": {
-                                "success" : "item.instance.status == 'completed'",
-                                "warning " : "item.instance.status != 'completed'"
-                            },
-                            "data": [
+                            "contents": [
                                 {
-                                    "order": 1,
-                                    "type": "data",
-                                    "id": "item.applicant.firstName"
+                                    "theme": "success",
+                                    "condition": "item.instance.status == 'completed'",
+                                    "data": [
+                                        {
+                                            "order": 1,
+                                            "type": "data",
+                                            "id": "item.instance.completedDate",
+                                            "pipe": "date"
+                                        },
+                                        {
+                                            "order": 2,
+                                            "type": "text",
+                                            "id": " "
+                                        },
+                                        {
+                                            "order": 3,
+                                            "type": "data",
+                                            "id": "item.instance.completedBy"
+                                        }
+                                    ]
                                 },
                                 {
-                                    "order": 2,
-                                    "type": "text",
-                                    "id": " "
-                                },
-                                {
-                                    "order": 3,
-                                    "type": "data",
-                                    "id": "item.applicant.lastName"
+                                    "theme": "warning",
+                                    "condition": "item.instance.status != 'completed'",
+                                    "data": [
+                                        {
+                                            "order": 1,
+                                            "type": "data",
+                                            "id": "item.instance.status"
+                                        },
+                                        {
+                                            "order": 2,
+                                            "type": "text",
+                                            "id": " "
+                                        },
+                                        {
+                                            "order": 3,
+                                            "type": "data",
+                                            "id": "item.instance.completedBy"
+                                        }
+                                    ]
                                 }
                             ]
                         },
-
                         {
                             "order": 4,
                             "type": "button",
