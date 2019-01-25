@@ -6,7 +6,48 @@
                 "lang": "tr",
                 "process": "retail-loan-application"
             },
-            "response": {}
+            "response": {
+                "data": [
+                    {
+                        "id": "citizenshipNumber"
+                    },
+                    {}
+                ],
+                "process": {
+                    "states": [
+                        {
+                            "id": "start",
+                            "label": "Başlangıç",
+                            "type": "start: start | normal | finish"
+                        },
+                        {
+                            "id": "profile",
+                            "label": "Profil Bilgileri",
+                            "type": "normal"
+                        },
+                        {
+                            "id": "smsOtp",
+                            "label": "Telefon Doğrulama",
+                            "type": "normal"
+                        },
+                        {
+                            "id": "evaluation",
+                            "label": "Değerlendirme",
+                            "type": "normal"
+                        }
+                    ],
+                    "actions": [
+                        {
+                            "id": "onStartExit",
+                            "label": "onStartExit",
+                            "process":
+                            {
+                                
+                            }
+                        }
+                    ]
+                }
+            }
         }
     ]
 }
