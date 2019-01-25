@@ -1,0 +1,12 @@
+{
+    "samples": [
+        {
+            "request": {
+                "user": "anonymous",
+                "lang": "tr",
+                "process": "retail-loan-application"
+            },
+            "response": {}
+        }
+    ]
+}
