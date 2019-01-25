@@ -18,7 +18,8 @@
                         {
                             "id": "start",
                             "label": "Başlangıç",
-                            "type": "start: start | normal | finish"
+                            "type": "start: start | normal | finish",
+                            "exitAction":"onStartExit"
                         },
                         {
                             "id": "profile",
@@ -40,10 +41,77 @@
                         {
                             "id": "onStartExit",
                             "label": "onStartExit",
-                            "process":
-                            {
-                                
-                            }
+                            "services": [
+                                {
+                                    "order": "1",
+                                    "type": "post : get | post | delete ",
+                                    "service": "/retailLoan/helper/onStartExit/{id}",
+                                    "request": [
+                                        {
+                                            "name": "id",
+                                            "type": "path",
+                                            "value": "item.id"
+                                        },
+                                        {
+                                            "name": "applicant",
+                                            "type": "body",
+                                            "value": "item.applicant"
+                                        }
+                                    ],
+                                    "response": {
+                                        "item.applicant": "response.data"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": "apply",
+                            "label": "Başvur",
+                            "services": [
+                                {
+                                    "order": "1",
+                                    "type": "get",
+                                    "service": "/mernis/queryByCitizenshipNumber/{citizenshipNumber}",
+                                    "request": [
+                                        {
+                                            "name": "citizenshipNumber",
+                                            "type": "path",
+                                            "value": "item.applicant.citizenshipNumber"
+                                        }
+                                    ],
+                                    "response": {
+                                        "item.applicant.name.first": "response.data.name.firstName",
+                                        "item.applicant.name.last": "response.data.name.lastName"
+                                    }
+                                },
+                                {
+                                    "order": "2",
+                                    "type": "get",
+                                    "service": "/mernis/QueryKKB/{citizenshipNumber}",
+                                    "request": [
+                                        {
+                                            "name": "citizenshipNumber",
+                                            "type": "path",
+                                            "value": "item.applicant.citizenshipNumber"
+                                        }
+                                    ],
+                                    "response": {
+                                        "item.applicant.kkb.score": "response.data.score"
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "transitions": [
+                        {
+                            "fromState": "start",
+                            "toState": "profile",
+                            "action": "apply"
+                        },
+                        {
+                            "fromState": "start",
+                            "toState": "smsOTP",
+                            "action": "applyWithProfile"
                         }
                     ]
                 }
